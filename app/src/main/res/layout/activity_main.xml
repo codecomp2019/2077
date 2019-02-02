@@ -17,18 +17,10 @@
         android:layout_width="290dp"
         android:layout_height="290dp"
         android:id="@+id/meme_view"
+        android:background="@color/gray"
         android:layout_centerHorizontal="true"
         android:layout_alignBaseline="@id/text_view"/>
 
-    <View
-        android:layout_width="290dp"
-        android:layout_height="290dp"
-
-
-        android:layout_alignLeft="@+id/meme_view"
-        android:layout_alignStart="@+id/meme_view"
-        android:layout_alignTop="@+id/meme_view"
-        android:background="@color/white" />
 
     <Button
         android:id="@+id/back_button"
@@ -47,7 +39,7 @@
         android:layout_above="@+id/more_button"
         android:layout_toEndOf="@+id/back_button"
         android:layout_toRightOf="@+id/back_button"
-        android:text="NEXT >" />
+        android:text="NEXT" />
     <TextView
         android:layout_width="290dp"
         android:layout_height="100dp"
