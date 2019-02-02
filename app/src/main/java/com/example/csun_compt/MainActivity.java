@@ -4,6 +4,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.util.Locale;
 
@@ -16,8 +17,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tts=new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
 
+//        View btnNext = findViewById(R.id.btnNext);
+//        btnNext.setOnClickListener( new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                speak("Next meme");
+//            }
+//        });
+
+    }
+
+    private void speak(final String str){
+        tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 // TODO Auto-generated method stub
@@ -28,15 +40,12 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("error", "This Language is not supported");
                     }
                     else{
-                        tts.speak("Hello World", TextToSpeech.QUEUE_FLUSH, null);
+                        tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
                     }
                 }
                 else
                     Log.e("error", "Initilization Failed!");
             }
         });
-
-        //Speaker speaker = new Speaker();
-        //speaker.textToSpeech("Hi");
     }
 }
