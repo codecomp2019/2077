@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout2"
     android:layout_width="350dp"
     android:layout_height="475dp"
+    android:layout_gravity="center"
     android:background="@color/gray"
-    android:padding="5dp"
-    android:layout_gravity="center">
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <!--button to close popup(or show the main activity page)-->
     <Button
         android:id="@+id/txtclose"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:textColor="@color/white"
-        android:text="X"
         android:background="@color/black"
+        android:text="X"
+        android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_alignParentRight="true"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!--text view of description of what user should do on this page-->
     <TextView
+        android:id="@+id/instr_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please onclude a description of the image, any text in the image, and a little info about why it's funny."
-        android:textStyle="bold"
-        android:textSize="12pt"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/txtclose"
-        android:textAlignment="center"
-        android:id="@+id/instr_text"
-        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:text="Please include a description of the image, any text in the image, and a little info about why it's funny."
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12pt"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtclose" />
 
-
+    <!--editable text box for submissions-->
     <EditText
         android:id="@+id/user_input_box"
         android:layout_width="300dp"
         android:layout_height="150dp"
 
-        android:layout_below="@+id/instr_text"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:background="@color/white" />
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instr_text" />
 
+    <!--button to submit and save the user submission-->
     <Button
         android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
         android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/user_input_box"
+        android:background="@color/black"
+        android:text="Submit"
         android:textColor="@color/white"
-        android:background="@color/black"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_input_box" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
