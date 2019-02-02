@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.os.Vibrator;
 
 import java.util.Locale;
 
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 //                speak("Next meme");
 //            }
 //        });
-
     }
 
     private void speak(final String str){
@@ -47,5 +47,13 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("error", "Initilization Failed!");
             }
         });
+    }
+
+    private void vibrate(){
+        Vibrator myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+//        myVib.vibrate(50);
+        // Star Wars Theme song
+        myVib.vibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}, -1);
+        Log.e("Mug", "vibration succeed");
     }
 }
