@@ -1,5 +1,10 @@
 package com.example.csun_compt;
 
+import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,13 +13,17 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Integer[] images = {R.drawable.meme1, R.drawable.meme2, R.drawable.meme3};
+    int endOfImages = images.length;
     int currImage = 0;
 
 
@@ -23,17 +32,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //imageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
+      /*  //imageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
         Button nextButton = (Button) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(this);
         Button backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(this);
         Button moreButton = (Button) findViewById(R.id.moreButton);
-        moreButton.setOnClickListener(this);
+        moreButton.setOnClickListener(this);*/
 
         initializeImageSwitcher();
         setInitialImage();
         setImageRotateListener();
+        setImageRotateBackwardListener();
+        moreButtonListener();
 
        /* imageSwitcher.setFactory(new ViewSwitcher.ViewFactory(){
            ImageView imageView = new ImageView(getApplicationContext());
@@ -47,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v){
-        switch(v.getId()){
+    /*    switch(v.getId()){
             case R.id.nextButton:
                nextButton();
                 break;
@@ -59,11 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
                 break;
-        }
-
-    }
-
-    public void nextButton() {
+        }*/
 
     }
 
@@ -93,15 +100,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+    private void setImageRotateBackwardListener() {
+        final Button rotatebutton = (Button) findViewById(R.id.backButton);
+        rotatebutton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                currImage--;
+                if (currImage == -1) {
+                    currImage = 0;
+                    displayToast("At beginning!");
+                }
+                setCurrentImage();
+            }
+        });
+    }
 
     private void setInitialImage() {
         setCurrentImage();
     }
 
     private void setCurrentImage() {
-        final ImageSwitcher imageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
+        // save for trying to move XML to ImageView instead of ImageSwitcher
+        //final ImageView imageSwitcher = (ImageView)findViewById(R.id.imageSwitcher);
+        //imageSwitcher.setImageResource(images[currImage]);
+
+        final ImageSwitcher imageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
         imageSwitcher.setImageResource(images[currImage]);
     }
+
+    private void displayToast(String message) {
+        Toast.makeText(getApplicationContext(), message,
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void moreButtonListener() {
+        final Button rotateButton = (Button) findViewById(R.id.moreButton);
+        rotateButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent i = new Intent(MainActivity.this, PopUpDialog.class);
+                startActivity(i);
+            }
+        });
+    }
+
+
+
 }
 
   /*  public void nextButton(){
