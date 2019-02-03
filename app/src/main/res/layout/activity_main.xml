@@ -2,17 +2,87 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
+    <!--spacer for aesthetics-->
+    <Space
+        android:id="@+id/spacer"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--this is the image view for the meme(gray right now just for visibility)-->
+    <ImageView
+        android:id="@+id/meme_view"
+        android:layout_width="290dp"
+        android:layout_height="290dp"
+        android:background="@color/gray"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cameraButton" />
+
+    <!--this is the button that takes you to the previous meme image-->
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="145dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:text="BACK"
+        app:layout_constraintLeft_toLeftOf="@+id/description_text_view"
+        app:layout_constraintStart_toStartOf="@+id/description_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
+
+
+    <!--this is the take a picture button-->
+    <Button
+        android:id="@+id/cameraButton"
+        android:layout_width="82dp"
+        android:layout_height="65dp"
+        android:text="CAMERA"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="0dp" />
+    <!--this is the button that brings you to the next meme image-->
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="145dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:text="NEXT"
+        app:layout_constraintBottom_toTopOf="@+id/more_button"
+        app:layout_constraintLeft_toRightOf="@+id/back_button"
+        app:layout_constraintStart_toEndOf="@+id/back_button" />
+
+    <!--this is an editable text view for user submissions-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/description_text_view"
+        android:layout_width="290dp"
+        android:layout_height="100dp"
+        android:scrollbars="vertical"
+        android:text="Yo! I'm trying to see if its possible to scroll on this in the emulator."
+        android:textColor="@color/white"
+        android:textSize="14pt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/meme_view" />
+
+    <!--this is the button that brings up the user submission pop up-->
+    <Button
+        android:id="@+id/more_button"
+        android:layout_width="145dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:text="More"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/back_button"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
