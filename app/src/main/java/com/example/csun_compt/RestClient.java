@@ -26,7 +26,7 @@ import cz.msebera.android.httpclient.protocol.HTTP;
 
 public class RestClient {
 
-    private static final String BASE_URL = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBftSSjlA0jAt3hz8fDg3-Qu5NT4F3FpME";
+    //private static final String BASE_URL = "INSERT AUTHENTICATION TOKEN HERE";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
     private int MAX_DESCRIPTION = 3;

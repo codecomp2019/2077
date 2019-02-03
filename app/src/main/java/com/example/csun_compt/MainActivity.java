@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //int endOfImages = images.length;
     int currImage = 0;
     public TextView descriptionTextView;
+    public Button rotateButton;
 
     Picasso p;
     Speaker speak;
@@ -55,9 +56,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //camera pt 2
+        //Attributes
+        rotateButton = (Button) findViewById(R.id.moreButton);
         cameraButton = (Button) findViewById(R.id.cameraButton);
         capturedImage = (ImageView) findViewById(R.id.imageView);
+
+
+
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(cInt, Image_Capture_Code);
             }
         });
+
 
         Intent intent = this.getIntent();
         speak = new Speaker(MainActivity.this);
@@ -84,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setInitialImage();
                 setImageRotateListener();
                 setImageRotateBackwardListener();
-                moreButtonListener();
 
                 descriptionTextView.setMovementMethod(new ScrollingMovementMethod());
             }
@@ -106,7 +111,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setInitialImage();
                 setImageRotateListener();
                 setImageRotateBackwardListener();
-                moreButtonListener();
+                rotateButton.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        /*
+                        //Intent i = new Intent(MainActivity.this, PopUpDialog.class);
+                        Intent i = new Intent(MainActivity.this, PopUpDialog.class);
+                        i.putExtra("ID", currImage);
+                        startActivity(i);
+                        */
+                    }
+                });
 
                 descriptionTextView.setMovementMethod(new ScrollingMovementMethod());
             }
@@ -172,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View arg0) {
                 currImage++;
-                if (currImage == 3) {
+                if (currImage == 5) {
                     currImage = 0;
                 }
                 setCurrentImageV2();
@@ -254,20 +269,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(getApplicationContext(), message,
                 Toast.LENGTH_SHORT).show();
     }
-
-    private void moreButtonListener() {
-        final Button rotateButton = (Button) findViewById(R.id.moreButton);
-        rotateButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(MainActivity.this, PopUpDialog.class);
-                i.putExtra("ID", currImage);
-                startActivity(i);
-
-            }
-        });
-    }
-
 
 
 }
