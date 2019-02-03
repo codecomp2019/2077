@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -17,28 +18,31 @@ import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Integer[] images = {R.drawable.meme1, R.drawable.meme2, R.drawable.meme3};
+    Integer[] images;
     int endOfImages = images.length;
     int currImage = 0;
+    private TextView descriptionTextView;
+
+    ModelDatabase db;
+    RestClient rclient;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        descriptionTextView = (TextView) findViewById(R.id.description_text_view);
 
-      /*  //imageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
-        Button nextButton = (Button) findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(this);
-        Button backButton = (Button) findViewById(R.id.backButton);
-        backButton.setOnClickListener(this);
-        Button moreButton = (Button) findViewById(R.id.moreButton);
-        moreButton.setOnClickListener(this);*/
+        rclient = new RestClient();
+        db = new ModelDatabase();
+
+        images = db.getall();
 
         initializeImageSwitcher();
         setInitialImage();
@@ -46,14 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setImageRotateBackwardListener();
         moreButtonListener();
 
-       /* imageSwitcher.setFactory(new ViewSwitcher.ViewFactory(){
-           ImageView imageView = new ImageView(getApplicationContext());
-           imageView.setScaleType(Image.ScaleType.CENTER_INSIDE);
-           imageView.setLayoutParams(new ImageSwitcher.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                        ViewGroup.LayoutParams.MATCH_PARENT));
-
-           return imageView;
-        });*/
+        descriptionTextView.setMovementMethod(new ScrollingMovementMethod());
     }
 
     @Override
@@ -100,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     private void setImageRotateBackwardListener() {
         final Button rotatebutton = (Button) findViewById(R.id.backButton);
         rotatebutton.setOnClickListener(new OnClickListener() {
@@ -125,8 +123,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //imageSwitcher.setImageResource(images[currImage]);
 
         final ImageSwitcher imageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
+
+        // Change image source in frontend
         imageSwitcher.setImageResource(images[currImage]);
+
+        String curr_descr = db.getdis(currImage);
+        TextView tview = (TextView)findViewById(R.id.description_text_view);
+
+        if( curr_descr.equals("") ){
+            rclient.post(db.getimg(currImage), MainActivity.this);
+            // ToDo function callback to save new descr in db
+        }
+        else {
+            tview.setText(curr_descr);
+        }
+
     }
+
 
     private void displayToast(String message) {
         Toast.makeText(getApplicationContext(), message,
