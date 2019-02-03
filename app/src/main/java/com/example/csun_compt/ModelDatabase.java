@@ -10,16 +10,17 @@ import java.util.ArrayList;
 public class ModelDatabase {
 
     ArrayList<Database> data = new ArrayList<Database>() {{
-        add(new Database(0,R.drawable.meme1,""));
-        add(new Database(1,R.drawable.meme2,""));
-        add(new Database(2,R.drawable.meme3,""));
-        add(new Database(3,R.drawable.meme4,""));
-        add(new Database(4,R.drawable.meme5,""));
+        //add(new Database(0,"https://spectatorau.imgix.net/content/uploads/2017/08/Snip20170801_15.png?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=820&h=550","Say Something"));
+        add(new Database(0, R.drawable.meme1,"Say something"));
+        add(new Database(1, R.drawable.meme2,""));
+        add(new Database(2, R.drawable.meme3,""));
+        add(new Database(3,"",""));
+        add(new Database(4,"",""));
     }};
 
-    public Integer[] getall ()
+    public Object[] getall ()
     {
-        Integer[] location = new Integer[4];
+        Object[] location = new Object[4];
         for (int i = 0; i < 4 ; i++)
         {
             location[i] = getimg(i);
@@ -27,12 +28,13 @@ public class ModelDatabase {
         return location;
     }
 
-    public int getimg (int id)
+    Object getimg (int id)
     {
         Database getel = data.get(id);
-        int imgnum = getel.memedir;
+        Object imgnum = getel.memedir;
         return imgnum;
     }
+
 
     public Bitmap getimg (String url)
     {
